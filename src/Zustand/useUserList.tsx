@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 import { sleep, userApi } from '../common/apiService';
-import { IDataListItem, IPagination } from '../common/types';
+import { IDataListItem, IPaginationParam } from '../common/types';
 
 interface IUserListStore {
   loading: boolean;
   dataSource: IDataListItem[];
-  fetchData: (para: IPagination) => Promise<void>;
+  fetchData: (para: IPaginationParam) => Promise<void>;
 }
 
 const useUserList = create<IUserListStore>()((set) => ({

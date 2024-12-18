@@ -1,13 +1,13 @@
 import { Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { userApi } from '../common/apiService';
-import { IDataListItem, IPagination } from '../common/types';
+import { IDataListItem, IPaginationParam } from '../common/types';
 
 const Basic = () => {
   const [loading, setLoading] = useState(true);
   const [dataSource, setDataSource] = useState<IDataListItem[]>([]);
 
-  const fetchData = async (para: IPagination) => {
+  const fetchData = async (para: IPaginationParam) => {
     setLoading(true);
     try {
       const data = await userApi(para);

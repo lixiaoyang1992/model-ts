@@ -5,23 +5,32 @@ import { IDataListItem } from '../common/types';
 import { UserListContext } from './UserStore';
 
 const UserList = observer(() => {
-  const state = useContext(UserListContext);
+  const { fetchData, loading, dataSource, pagination } = useContext(UserListContext);
 
   useLayoutEffect(() => {
-    state.fetchData({
+    fetchData({
       page: 1,
       pageSize: 10,
     });
   }, []);
 
-  console.log('UserList state', state);
-
   return (
     <div>
       <Table<IDataListItem>
-        loading={state.loading}
+        loading={loading}
         rowKey={(item) => item.id}
-        dataSource={state.dataSource}
+        dataSource={dataSource}
+        pagination={{
+          current: pagination.page,
+          pageSize: pagination.pageSize,
+          total: pagination.total,
+          onChange: (page, pageSize) => {
+            fetchData({
+              page,
+              pageSize,
+            });
+          },
+        }}
       >
         <Table.Column<IDataListItem> key="id" title="id" dataIndex="id" />
         <Table.Column<IDataListItem> key="username" title="Name" dataIndex="username" />

@@ -4,7 +4,11 @@ export interface IDataListItem {
   email: string;
 }
 
-export interface IPagination {
+export interface IPaginationParam {
   page: number;
   pageSize: number;
+}
+
+export interface IPagination extends IPaginationParam {
+  total: number;
 }
